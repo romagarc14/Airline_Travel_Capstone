@@ -48,8 +48,8 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/flights/time", method = RequestMethod.GET)
-    public List<Flights> getAllFlightsByMinutesTraveled(){
-       return flightService.getAllFlightsByMinutesTraveled();
+    public List<Flights> getAllFlightsByTotalTime(){
+       return flightService.getAllFlightsByTotalTime();
     }
 
     @GetMapping(value = "/flights/airlines/{airlineId}")
@@ -71,12 +71,12 @@ public class FlightController {
         return flightService.getFlightsByAirportAndAirline(airportName, airlineId);
     }
 
-    @GetMapping(value = "/cheap/{airportName}/{destination}")
+    @GetMapping(value = "/cheapest/{airportName}/{destination}")
     public List<Flights> getFlightsByAirportAndDestination(@PathVariable String airportName, @PathVariable String destination){
        return flightService.getFlightsByAirportAndDestination(airportName, destination);
     }
 
-    @GetMapping(value = "/short/{destination}/{airportName}")
+    @GetMapping(value = "/shortest/{destination}/{airportName}")
     public List<Flights> getFlightTimeByAirportAndDestination(@PathVariable String destination, @PathVariable String airportName){
        return flightService.getFlightTimeByAirportAndDestination(destination, airportName);
     }

@@ -29,11 +29,11 @@ In the flight information system, the client should be able to do the following:
 · Retrieve all Airline information
 · Calculate flight prices based on distance
 · The cheapest or shortest flight between two airports
-· Retrieve all flight information associated with a specific airline at a   specific airport
+· Retrieve all flight information associated with a specific airline at a specific airport
 
 ------------------------------------------------
 
-ACTUAL ROUTES
+ALL ROUTES
 CRUD Operations for each individual class
 · In Airlines
   - Create airline
@@ -69,7 +69,7 @@ Airports
 Flights
 · Find all, sort by Price
       /flights/price
-· Find all, sort by Minutes Traveled
+· Find all, sort by Total Time
       /flights/time
 · Find by Airline Id
       /flights/airlines/{airlineId}
@@ -80,9 +80,9 @@ Flights
 · Find by Airport Name and Airline Id
       /flights/{airportName}/{airlineId}
 · Find distance between two locations, sorted by Price
-      /cheap/{airportName}/{destination}
-· Find distance between two locations, sorted by Minutes Traveled
-      /short/{destination}/{airportName}
+      /cheapest/{airportName}/{destination}
+· Find distance between two locations, sorted by Total Time
+      /shortest/{destination}/{airportName}
 
 ------------------------------------------------
 
@@ -167,8 +167,36 @@ Price Calculation:
 ------------------------------------------------
 
 Test Sample:
-JETBLUE		rate (0.9)
-	DFW to JFK | 180m | 1350 miles | $337.50
+JETBLUE
+FRONTIER
+ALLEGIANT
+
+MCO Orlando
+BOS Boston
+150m | 1116 miles
 	
 ------------------------------------------------	
+
+Postman Entry:
+Airlines
+{
+ "name": " "
+}
+
+Airports
+{
+ "airlineId": " ",
+ "city": " ",
+ "name": " "
+}
+
+Flights
+{
+ "airportName": " ",
+ "numOfStops": " ",
+ "minutesTraveled": " ",
+ "distance": " ",
+ "destination": " ",
+ "airlineId": " "
+}
 

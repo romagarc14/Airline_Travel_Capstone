@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @Component
@@ -35,8 +36,8 @@ public class FlightService {
         return flightRepo.findAll(Sort.by(Sort.Direction.ASC,"price"));
     }
 
-    public List<Flights> getAllFlightsByMinutesTraveled(){
-        return flightRepo.findAll(Sort.by(Sort.Direction.ASC,"minutesTraveled"));
+    public List<Flights> getAllFlightsByTotalTime(){
+        return flightRepo.findAll(Sort.by(Sort.Direction.ASC,"totalTime"));
     }
 
     public List<Flights> getFlightsByAirlineId(int airlineId){
@@ -58,16 +59,18 @@ public class FlightService {
     }
 
     public List<Flights> getFlightTimeByAirportAndDestination(String destination, String airportName) {
-       return flightRepo.findByDestinationAndAirportName(destination, airportName, Sort.by(Sort.Direction.ASC, "minutesTraveled"));
+       return flightRepo.findByDestinationAndAirportName(destination, airportName, Sort.by(Sort.Direction.ASC, "totalTime"));
     }
-
 
 
     //Price Calculation
     public Flights addFlight(Flights flights){
         String airportName = flights.getAirportName();
 
+        int numOfStops = flights.getNumOfStops();
         int minutesTraveled = flights.getMinutesTraveled();
+        minutesTraveled += (45 * numOfStops);
+
         int distance = flights.getDistance();
         int airlineId = flights.getAirlineId();
         int multiplier = 50;
@@ -92,8 +95,10 @@ public class FlightService {
                     rate = 0.9;
             }
 
-        double price = (rate * distance * multiplier)/minutesTraveled;
+        double price = (rate * distance * multiplier)/ minutesTraveled;
+        int totalTime = minutesTraveled;
 
+        flights.setTotalTime(totalTime);
         flights.setPrice(price);
         flightRepo.save(flights);
         return flights;

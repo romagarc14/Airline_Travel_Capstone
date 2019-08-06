@@ -30,6 +30,7 @@ public class Flights {
     @NotNull
     private String destination;
     private Double price;
+    private Integer totalTime;
     private Integer airlineId;
 
 
@@ -109,6 +110,15 @@ public class Flights {
         this.airlineId = airlineId;
     }
 
+    public Integer getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(Integer totalTime) {
+        this.totalTime = totalTime;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,7 +135,8 @@ public class Flights {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getAirportName(), getNumOfStops(), getMinutesTraveled(), getDistance(), getDestination(), getAllAirlines());
+        return Objects.hash(getId(), getAirportName(), getNumOfStops(), getMinutesTraveled(), getDistance(),
+                getDestination(), getAllAirlines());
     }
 
     @Override
