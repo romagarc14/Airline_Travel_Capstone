@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -29,7 +30,7 @@ public class Flights {
     private Integer distance;
     @NotNull
     private String destination;
-    private Double price;
+    private BigDecimal price;
     private Integer totalTime;
     private Integer airlineId;
 
@@ -94,11 +95,11 @@ public class Flights {
         this.destination = destination;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

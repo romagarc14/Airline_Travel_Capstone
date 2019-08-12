@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.InvalidParameterException;
 import java.util.List;
 
@@ -95,8 +97,9 @@ public class FlightService {
                     rate = 0.9;
             }
 
-        double price = (rate * distance * multiplier)/ minutesTraveled;
+        double base = (rate * distance * multiplier)/ minutesTraveled;
         int totalTime = minutesTraveled;
+        BigDecimal price = BigDecimal.valueOf(base).setScale(2, RoundingMode.HALF_UP);
 
         flights.setTotalTime(totalTime);
         flights.setPrice(price);
